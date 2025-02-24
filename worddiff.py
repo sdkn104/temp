@@ -49,14 +49,14 @@ def extract_changed_paragraphs(docx_path):
         # 段落内に<w:ins>または<w:del>が存在する場合、変更があったと判断
         has_ins = p.xpath('.//w:ins', namespaces=NS)
         has_del = p.xpath('.//w:del', namespaces=NS)
-        print(has_ins)
-        print(has_del)
+        #print(has_ins)
+        #print(has_del)
         if has_ins or has_del:
             before_text = get_paragraph_text_lxml(p, mode='before')
             after_text = get_paragraph_text_lxml(p, mode='after')
             if before_text != after_text:
               results.append((before_text, after_text))
-              print("xxxxx")
+              #print("xxxxx")
     return results
 
 if __name__ == '__main__':
