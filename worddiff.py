@@ -39,9 +39,10 @@ def extract_changed_paragraphs(docx_path):
     # XMLパース
     parser = etree.XMLParser(ns_clean=True)
     tree = etree.fromstring(xml_content, parser)
-    
+    print(tree)
     # 全ての段落を取得
     paragraphs = tree.xpath('//w:p', namespaces=NS)
+    print(paragraphs)
     
     results = []
     for p in paragraphs:
