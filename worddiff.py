@@ -55,6 +55,7 @@ def extract_changed_paragraphs(docx_path):
             before_text = get_paragraph_text_lxml(p, mode='before')
             after_text = get_paragraph_text_lxml(p, mode='after')
             results.append((before_text, after_text))
+            print("xxxxx")
     return results
 
 if __name__ == '__main__':
