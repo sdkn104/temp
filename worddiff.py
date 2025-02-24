@@ -62,7 +62,7 @@ if __name__ == '__main__':
     # 処理対象のdocxファイルのパス
     docx_path = '000087509.docx'
     changed_paragraphs = extract_changed_paragraphs(docx_path)
-    exit()
+    
     # 各段落ごとに変更前と変更後のテキストを出力
     for idx, (before, after) in enumerate(changed_paragraphs, start=1):
         print(f"段落 {idx}")
