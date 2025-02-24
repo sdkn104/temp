@@ -56,7 +56,7 @@ def extract_changed_paragraphs(docx_path):
 
 if __name__ == '__main__':
     # 処理対象のdocxファイルのパス
-    docx_path = 'your_document.docx'
+    docx_path = 'co_form_maemuki_02.docx'
     changed_paragraphs = extract_changed_paragraphs(docx_path)
     
     # 各段落ごとに変更前と変更後のテキストを出力
