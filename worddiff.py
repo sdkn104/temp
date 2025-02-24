@@ -39,7 +39,7 @@ def extract_changed_paragraphs(docx_path):
     # XMLパース
     parser = etree.XMLParser(ns_clean=True)
     tree = etree.fromstring(xml_content, parser)
-    print(tree)
+    
     # 全ての段落を取得
     paragraphs = tree.xpath('//w:p', namespaces=NS)
     print(paragraphs)
@@ -57,7 +57,7 @@ def extract_changed_paragraphs(docx_path):
 
 if __name__ == '__main__':
     # 処理対象のdocxファイルのパス
-    docx_path = 'co_form_maemuki_02.docx'
+    docx_path = '000087509.docx'
     changed_paragraphs = extract_changed_paragraphs(docx_path)
     
     # 各段落ごとに変更前と変更後のテキストを出力
