@@ -12,7 +12,7 @@ def get_paragraph_text_lxml(p, mode='after'):
     """
     texts = []
     for elem in p.iter():
-        if elem.tag.endswith('}t'):  # テキスト要素
+        if elem.tag.endswith('}t') or elem.tag.endswith('}insText') or elem.tag.endswith('}delText'):  # テキスト要素
             # 祖先にw:ins, w:delがあるかチェック
             in_ins = any(ancestor.tag.endswith('}ins') for ancestor in elem.iterancestors())
             in_del = any(ancestor.tag.endswith('}del') for ancestor in elem.iterancestors())
@@ -47,8 +47,8 @@ def extract_changed_paragraphs(docx_path):
     results = []
     for p in paragraphs:
         # 段落内に<w:ins>または<w:del>が存在する場合、変更があったと判断
-        has_ins = p.xpath('.//w:ins', namespaces=NS)
-        has_del = p.xpath('.//w:del', namespaces=NS)
+        has_ins = p.xpath('.//w:ins', namespaces=NS) or p.xpath('.//w:insText', namespaces=NS)
+        has_del = p.xpath('.//w:del', namespaces=NS) or p.xpath('.//w:delText', namespaces=NS)
         #print(has_ins)
         #print(has_del)
         if has_ins or has_del:
@@ -61,15 +61,18 @@ def extract_changed_paragraphs(docx_path):
 
 if __name__ == '__main__':
     # 処理対象のdocxファイルのパス
-    docx_path = '000087509.docx'
+    docx_path = 'diff.docx'
     changed_paragraphs = extract_changed_paragraphs(docx_path)
     
     # 各段落ごとに変更前と変更後のテキストを出力
+    with open("output.txt", "w", encoding="utf8") as f:
+        f.write(f"")
     for idx, (before, after) in enumerate(changed_paragraphs, start=1):
-        print(f"段落 {idx}")
-        print("【変更前】")
-        print(before)
-        print("【変更後】")
-        print(after)
-        print("-------------------------------")
+        with open("output.txt", "a", encoding="utf8") as f:
+            f.write(f"段落 {idx}\n")
+            f.write("【変更前】\n")
+            f.write(before)
+            f.write("\n【変更後】\n")
+            f.write(after)
+            f.write("\n-------------------------------\n")
         
